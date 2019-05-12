@@ -1,0 +1,32 @@
+CREATE TABLE `TCC_TRANSACTION_TEST` (
+  `TRANSACTION_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DOMAIN` varchar(100) DEFAULT NULL,
+  `GLOBAL_TX_ID` varbinary(32) NOT NULL,
+  `BRANCH_QUALIFIER` varbinary(32) NOT NULL,
+  `CONTENT` varbinary(8000) DEFAULT NULL,
+  `STATUS` int(11) DEFAULT NULL,
+  `TRANSACTION_TYPE` int(11) DEFAULT NULL,
+  `RETRIED_COUNT` int(11) DEFAULT NULL,
+  `CREATE_TIME` datetime DEFAULT NULL,
+  `LAST_UPDATE_TIME` datetime DEFAULT NULL,
+  `VERSION` int(11) DEFAULT NULL,
+  PRIMARY KEY (`TRANSACTION_ID`),
+  UNIQUE KEY `UX_TX_BQ` (`GLOBAL_TX_ID`,`BRANCH_QUALIFIER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `TCC_TRANSACTION_TEST` ADD `IS_DELETE` tinyint(1) DEFAULT 0 NOT NULL;
+
+CREATE TABLE `tcc_fly_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bus_id` varchar(50) DEFAULT NULL,
+  `idcard` varchar(32) NOT NULL,
+  `status` char(1) NOT NULL,
+  `money` varchar(12) DEFAULT NULL,
+  `frozen` char(1) DEFAULT NULL,
+  `remark` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+BEGIN;
+INSERT INTO `tcc_fly_order` VALUES ('1', '71bbf25a-9ed1-4b5e-a131-7526f4c217ee', '', '0', '500', '0', '国航'), ('2', 'ee431ba3-6e76-49b9-8199-29d2e7f13904', '', '0', '500', '0', '国航'), ('3', '213123134', '', '0', '500', '0', '国航');
+COMMIT;
